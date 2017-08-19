@@ -1,0 +1,104 @@
+﻿@model KYN_App_v1._1.Models.IndexBusinessViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var grid = new WebGrid(Model.BusinessPrimaryDetailEntity);
+}
+
+
+<h2>Review Business Details</h2>
+
+<div id="gridContent" style=" padding:20px; ">
+    @grid.GetHtml(
+            tableStyle: "webgrid-table",
+            headerStyle: "webgrid-header",
+            footerStyle: "webgrid-footer",
+            alternatingRowStyle: "webgrid-alternating-row",
+            selectedRowStyle: "webgrid-selected-row",
+            rowStyle: "webgrid-row-style",
+            mode: WebGridPagerModes.All,
+            columns:
+                grid.Columns(
+                grid.Column("ID", "ID", format:@<text>@item.ID</text>, style: "col1Width"),
+                grid.Column("Type", "Type", format:@<text>@item.BusinessType.BusinessTypeName</text>, style: "col1Width"),
+                grid.Column("Category", "Category", format:@<text>@item.Category.CategoryName</text>, style: "col1Width"),
+                grid.Column("SubCategory", "Sub Category", format:@<text>@item.SubCategory.SubCategoryName</text>, style: "col1Width"),
+                grid.Column("Name", "Name", format:@<text>@item.Name</text>, style: "col1Width"),
+                grid.Column("Primary-No", "Primary Contact No", format:@<text>@item.OfficialContactNumber1</text>, style: "col1Width"),
+                grid.Column("Secondary-No", "Alternate Contact No", format:@<text>@item.OfficialContactNumber2</text>, style: "col1Width"),
+                grid.Column("Business_Email", "Business Email", format:@<text>@item.BusinessEmail</text>, style: "col1Width"),
+                grid.Column("Imasge", "Primary Image", format:@<text>
+    <img src=@item.ImagePath alt="\" class="img-responsive"/>
+    @Html.ActionLink("Upload", "UploadFile", "Upload", new { ID = @item.ID }, null)</text>, style: "col1Width"),
+                @*grid.Column("AddresssType", "Address Type", format:@<text>@item.AddressTypeName</text>, style: "col1Width"),
+                grid.Column("Building_Name", "Building Name", format:@<text>@item.BuildingName</text>, style: "col1Width"),*@
+                                                                    @*grid.Column("Type", format: @<text>  <span class="display-mode">@item.CostCenterID </span> <label id="UserID" class="edit-mode">@item.CostCenterID</label> </text>, style: "col1Width" ),
+                                                                        grid.Column("Name", "Name", format: @<text>  <span class="display-mode"> <label id="lblName">@item.Name</label> </span> <input type="text" id="Name" value="@item.Name" class="edit-mode" /></text>, style: "col2Width"),*@
+
+     grid.Column("Action", format: @<text>
+        @Html.ActionLink("Manage Supporting Images", "UploadMultipleFiles", "Upload", new { ID = @item.ID }, null)
+    </text>, style: "col1Width", canSort: false),
+
+                 grid.Column("Action", format: @<text>
+        @*@Html.ActionLink("Add New Business", "CreateBusinessDetail", null, new { @class = "btn btn-lg btn-facebook btn-block" })*@
+    @Html.ActionLink("Edit Detail", "UpdateBusinessDetail", "Business", new { businessDetailID = @item.ID }, null)
+                </text>, style: "col1Width", canSort: false),
+
+                 grid.Column("Action", format: @<text>
+                        @Html.ActionLink("Promotion Dashboard", "ManagePromotions", "BusinessPromotion", new { businessDetailID = @item.ID }, null)
+                </text>, style: "col1Width", canSort: false)
+
+          ))
+</div>
+<div>
+    <p>
+        @*<input class="btn btn-lg btn-facebook btn-block"  type="submit" value="Login via facebook">*@
+        @Html.ActionLink("Add New Business", "CreateBusinessDetail", null, new { @class = "btn btn-lg btn-facebook btn-block" })
+    </p>
+</div>
+
+<style type="text/css">
+    .webgrid-table {
+        font-family: Arial,Helvetica,sans-serif;
+        font-size: 14px;
+        font-weight: normal;
+        width: 650px;
+        display: table;
+        border-collapse: collapse;
+        border: solid px #C5C5C5;
+        background-color: white;
+    }
+
+        .webgrid-table td, th {
+            border: 1px solid #C5C5C5;
+            padding: 3px 7px 2px;
+        }
+
+    .webgrid-header, .webgrid-header a {
+        background-color: #E3E3E3;
+        color: black;
+        text-align: left;
+        text-decoration: none;
+    }
+
+    .webgrid-footer {
+    }
+
+    .webgrid-row-style {
+        padding: 3px 7px 2px;
+    }
+
+    .webgrid-alternating-row {
+        background-color: #F5F5F5;
+        padding: 3px 7px 2px;
+    }
+
+    .col1Width {
+        width: 50px;
+    }
+
+    .col2Width {
+        width: 200px;
+    }
+</style>

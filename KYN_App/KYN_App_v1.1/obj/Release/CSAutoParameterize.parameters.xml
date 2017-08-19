@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="DefaultConnection-Web.config Connection String" description="DefaultConnection Connection String used in web.config by the application to access the database." defaultValue="Data Source=148.72.232.168;Initial Catalog=KYNDatabase;Persist Security Info=True;User ID=KYN_Admin;Password=N!kh!l!8092" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="E:\\Code\\KYN\\KYN_App_v1\.3\\KYN_App_v1\.1\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
+  </parameter>
+  <parameter name="KYN_1Entities-Web.config Connection String" description="KYN_1Entities Connection String used in web.config by the application to access the database." defaultValue="metadata=res://*/Model.KYNModel.csdl|res://*/Model.KYNModel.ssdl|res://*/Model.KYNModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=148.72.232.168;initial catalog=KYNDatabase;multipleactiveresultsets=True;User ID=KYN_Admin;Password=N!kh!l!8092;App=EntityFramework&quot;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="E:\\Code\\KYN\\KYN_App_v1\.3\\KYN_App_v1\.1\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='KYN_1Entities']/@connectionString" />
+  </parameter>
+</parameters>

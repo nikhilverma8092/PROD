@@ -1,0 +1,45 @@
+﻿@model IEnumerable<KYN_App_v1._1.Models.UserBlogViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <h2>Issues/Events-need attention and more participation</h2>
+    <h5>Please login to read in detail and submit your comment and show your support for the cause</h5>
+    <h5>Why Login is Important-This is necessary to avoid any fake or anonymous comment or negative support for the cause, as this is for the betterment for the society</h5>
+    <h5>Cross Friend take care for all the secrecy of email address and phone number.</h5>
+    <h3>If you have ay comment or suggestions then please contact at +91-9811730868</h3>
+    <br />
+    @{
+        foreach (var item in Model)
+        {
+            <div id="blog" class="row" style="margin-bottom:10px; border-style:inset">
+                <div class="col-md-11 blogShort">
+                    <h1>@item.BlogTitle</h1>
+                    <div class="col-md-4">
+                        <img src=@item.ImagePath alt="post img" class="img img-responsive hoverable fade-in">
+                    </div>
+                    <div class="col-md-8">
+                        <em>Submitted by <a href=@item.Name target="_blank">@item.Name @item.CreatedOn</a></em>
+                        <article>
+                            <p>@item.BlogHeadLine</p>
+                            <p>Below are the points for which we are fighting</p>
+                            <p>1.	Schools are non profitable organizations and they can't make money out of it.</p>
+                            <p>2.	Education is not a business.</p>
+                            <p>3. 	According to CBSE- Schools can charge only for tution fee and expenses.</p>
+                            <p>4. 	According to CBSE- Schools are not authorized to take annual charges.</p>
+                            <p>5.	Schools are not authorized to sell books and uniform in the school campus or can't force parents to purchase it from some specific vendor.</p>
+                            <p>6.	Schools should use the NCERT books not any private or specific publications.</p>
+                            <p>7.	There should be a transparency in fee hike and parents should be aware of that.</p>
+                            <p>8.	They can't charge unnecessary charges for the some kit or model which is not designed for the curriculam.</p>
+                        </article>
+                    </div>
+                    @*<a class="btn btn-blog pull-right marginBottom10" href="/NewsLetter/Ghaziabad/Crossings/@item.BlogTitle/@item.ID">READ MORE</a>*@
+                    @Html.ActionLink("Read More", "GetBlog", new { ID = @item.ID }, new { @class = "btn btn-blog pull-right marginBottom10" })
+                </div>
+            </div>
+        }
+    }
+</div>

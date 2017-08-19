@@ -1,0 +1,99 @@
+﻿@model KYN_App_v1.Models.ManagePromotionViewModel
+
+@{
+    ViewBag.Title = "ValidCouponsByBusinessDetailID";
+    var grid = new WebGrid(Model.PromotionDetailEntity);
+}
+
+<h2>Manage Promotions</h2>
+
+<div id="gridContent" style="padding:20px;">
+    @grid.GetHtml(
+            tableStyle: "webgrid-table",
+            headerStyle: "webgrid-header",
+            footerStyle: "webgrid-footer",
+            alternatingRowStyle: "webgrid-alternating-row",
+            selectedRowStyle: "webgrid-selected-row",
+            rowStyle: "webgrid-row-style",
+            mode: WebGridPagerModes.All,
+            columns:
+                grid.Columns(
+                grid.Column("ID", "ID", format: @<text>@item.ID</text>, style: "col1Width"),
+                grid.Column("ID", "Promotion Name", format: @<text>@item.PromotionDetailName</text>, style: "col1Width"),
+                grid.Column("InitialQuantity", "InitialQuantity", format: @<text>@item.InitialQuantity</text>, style: "col1Width"),
+                grid.Column("ValueType", "Value Type", format: @<text>@item.ValueType</text>, style: "col1Width"),
+                grid.Column("PerCouponTotalValue", "Per Coupon Value", format: @<text>@item.PerCouponTotalValue</text>, style: "col1Width"),
+                grid.Column("CouponValidFor", "Coupon Valid For", format: @<text>@item.CouponValidFor</text>, style: "col1Width"),
+                grid.Column("StillLeftQuantity", "Still Left Quantity", format: @<text>@item.StillLeftQuantity</text>, style: "col1Width"),
+    @*grid.Column("AddresssType", "Address Type", format:@<text>@item.AddressTypeName</text>, style: "col1Width"),
+        grid.Column("Building_Name", "Building Name", format:@<text>@item.BuildingName</text>, style: "col1Width"),*@
+    @*grid.Column("Type", format: @<text>  <span class="display-mode">@item.CostCenterID </span> <label id="UserID" class="edit-mode">@item.CostCenterID</label> </text>, style: "col1Width" ),
+        grid.Column("Name", "Name", format: @<text>  <span class="display-mode"> <label id="lblName">@item.Name</label> </span> <input type="text" id="Name" value="@item.Name" class="edit-mode" /></text>, style: "col2Width"),*@
+ grid.Column("Action", format: @<text>
+        @Html.ActionLink("Generate Coupon", "GenerateCoupon", "BusinessPromotion", new { promotionDetailID = @item.ID, businessDetailID =@Model.BusinessDetailID}, null)
+</text>, style: "col1Width", canSort: false)
+                                                                                  ))
+</div>
+
+<div>
+    <div class="row">
+        <div>
+            @{
+                if (@Model.PromotionDetailEntity == null || @Model.PromotionDetailEntity.Count == 0)
+                {
+                    @Html.ActionLink("Go Back To Search", "Index", "Search", null, null)
+                }
+                else
+                {
+                    @Html.ActionLink("Go Back To Search", "SearchBusinessDetailBySubCategory", "Search", new { subCategoryID = @Model.PromotionDetailEntity[0].SubCategoryID }, null)
+                }
+            }            
+        </div>
+    </div>
+</div>
+
+
+<style type="text/css">
+    .webgrid-table {
+        font-family: Arial,Helvetica,sans-serif;
+        font-size: 14px;
+        font-weight: normal;
+        width: 650px;
+        display: table;
+        border-collapse: collapse;
+        border: solid px #C5C5C5;
+        background-color: white;
+    }
+
+        .webgrid-table td, th {
+            border: 1px solid #C5C5C5;
+            padding: 3px 7px 2px;
+        }
+
+    .webgrid-header, .webgrid-header a {
+        background-color: #E3E3E3;
+        color: black;
+        text-align: left;
+        text-decoration: none;
+    }
+
+    .webgrid-footer {
+    }
+
+    .webgrid-row-style {
+        padding: 3px 7px 2px;
+    }
+
+    .webgrid-alternating-row {
+        background-color: #F5F5F5;
+        padding: 3px 7px 2px;
+    }
+
+    .col1Width {
+        width: 50px;
+    }
+
+    .col2Width {
+        width: 200px;
+    }
+</style>

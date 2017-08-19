@@ -1,0 +1,229 @@
+﻿@model KYN_App_v1._1.Models.ResponseObject
+
+@{
+    ViewBag.Title = "SearchBusinessResult";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Resale_v2 a Classified ads Category Flat Bootstrap Responsive Website Template | Kids :: w3layouts</title>
+    <link rel="stylesheet" href="~/Content/css/bootstrap.min.css"><!-- bootstrap-CSS -->
+    <link rel="stylesheet" href="~/Content/css/bootstrap-select.css"><!-- bootstrap-select-CSS -->
+    <link href="~/Content/css/style.css" rel="stylesheet" type="text/css" media="all" /><!-- style.css -->
+    <link rel="stylesheet" type="text/css" href="~/Content/css/jquery-ui1.css">
+    <link rel="stylesheet" href="~/Content/css/font-awesome.min.css" /><!-- fontawesome-CSS -->
+    <link rel="stylesheet" href="~/Content/css/menu_sideslide.css" type="text/css" media="all"><!-- Navigation-CSS -->
+    <!-- meta tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Resale Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola web design" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- //meta tags -->
+    <!--fonts-->
+    <link href='//fonts.googleapis.com/css?family=Ubuntu+Condensed' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+    <!--//fonts-->
+    <!-- js -->
+    <script type="text/javascript" src="~/Scripts/js/jquery.min.js"></script>
+    <!-- js -->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="~/Scripts/js/bootstrap.js"></script>
+    <script src="~/Scripts/js/bootstrap-select.js"></script>
+    <script>
+        $(document).ready(function () {
+            var mySelect = $('#first-disabled2');
+
+            $('#special').on('click', function () {
+                mySelect.find('option:selected').prop('disabled', true);
+                mySelect.selectpicker('refresh');
+            });
+
+            $('#special2').on('click', function () {
+                mySelect.find('option:disabled').prop('disabled', false);
+                mySelect.selectpicker('refresh');
+            });
+
+            $('#basic2').selectpicker({
+                liveSearch: true,
+                maxOptions: 1
+            });
+        });
+    </script>
+    <!-- language-select -->
+    <script type="text/javascript" src="~/Scripts/js/jquery.leanModal.min.js"></script>
+    <link href="~/Content/css/jquery.uls.css" rel="stylesheet" />
+    <link href="~/Content/css/jquery.uls.grid.css" rel="stylesheet" />
+    <link href="~/Content/css/jquery.uls.lcd.css" rel="stylesheet" />
+    <!-- Source -->
+    <script src="~/Scripts/js/jquery.uls.data.js"></script>
+    <script src="~/Scripts/js/jquery.uls.data.utils.js"></script>
+    <script src="~/Scripts/js/jquery.uls.lcd.js"></script>
+    <script src="~/Scripts/js/jquery.uls.languagefilter.js"></script>
+    <script src="~/Scripts/js/jquery.uls.regionfilter.js"></script>
+    <script src="~/Scripts/js/jquery.uls.core.js"></script>
+
+    <!-- //language-select -->
+    <!-- switcher-grid and list alignment -->
+    <script src="~/Scripts/js/tabs.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var elem = $('#container ul');
+            $('#viewcontrols a').on('click', function (e) {
+                if ($(this).hasClass('gridview')) {
+                    elem.fadeOut(1000, function () {
+                        $('#container ul').removeClass('list').addClass('grid');
+                        $('#viewcontrols').removeClass('view-controls-list').addClass('view-controls-grid');
+                        $('#viewcontrols .gridview').addClass('active');
+                        $('#viewcontrols .listview').removeClass('active');
+                        elem.fadeIn(1000);
+                    });
+                }
+                else if ($(this).hasClass('listview')) {
+                    elem.fadeOut(1000, function () {
+                        $('#container ul').removeClass('grid').addClass('list');
+                        $('#viewcontrols').removeClass('view-controls-grid').addClass('view-controls-list');
+                        $('#viewcontrols .gridview').removeClass('active');
+                        $('#viewcontrols .listview').addClass('active');
+                        elem.fadeIn(1000);
+                    });
+                }
+            });
+        });
+    </script>
+    <!-- //switcher-grid and list alignment -->
+</head>
+<body>
+    <div class="w3layouts-breadcrumbs text-center">
+        <div class="container">
+            <span class="agile-breadcrumbs">
+                <a href="/Ghaziabad/Crossings"><i class="fa fa-home home_1"></i></a> /
+                <a href="/Ghaziabad/Crossings">Categories</a> /
+                <a href="/Ghaziabad/Crossings/@Model.CategoryName">@Model.CategoryName</a> /
+                <span>@Model.SubCategoryName</span>
+            </span>
+        </div>
+    </div>
+    <div class="total-ads main-grid-border">
+        <div class="container">
+            <div class="ads-grid">
+                <div class="side-bar col-md-3">
+                    <div class="search-hotel">
+                        <h3 class="agileits-sear-head">Name contains</h3>
+                        <form>
+                            <input type="text" value="Product name..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Product name...';}" required="">
+                            <input type="submit" value=" ">
+                        </form>
+                    </div>
+                    <div class="w3ls-featured-ads">
+                        <h2 class="sear-head fer">Featured Ads</h2>
+                        @for (int count = 0; count < 1; count++)
+                        {
+                            <div class="w3l-featured-ad">
+                                <a href="single.html">
+                                    <div class="w3-featured-ad-left">
+                                        <img src="~/Images/SubCategory_Images/Ads/Dummy.png" title="ad image" alt="" />
+                                    </div>
+                                    <div class="w3-featured-ad-right">
+                                        <h4>Space available for Ad</h4>
+                                        <p>Contact</p>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </a>
+                            </div>
+                        }
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <div class="agileinfo-ads-display col-md-9">
+                    <div class="wrapper">
+
+
+                        <div id="container">
+                            <div class="view-controls-list" id="viewcontrols">
+                                <label>view :</label>
+                                <a class="gridview"><i class="glyphicon glyphicon-th"></i></a>
+                                <a class="listview active"><i class="glyphicon glyphicon-th-list"></i></a>
+                            </div>
+                            <div class="clearfix"></div>
+                            <ul class="list">
+                                @{
+                                    foreach (var item in Model.Businesses)
+                                    {
+
+                                        <li class="w3layouts-boder11">
+                                            <a href="/Ghaziabad/Crossings/@item.Category.CategoryName/@item.SubCategory.SubCategoryName/@item.Name.Replace(' ', '-').Replace('&','-')/@item.ID">
+                                                <img src=@item.ImagePath title="" alt="" />
+                                                <section class="list-left">
+                                                    <h1 class="title">@item.Name</h1>
+                                                    <h4 style="padding-top:2%">@item.Description</h4>
+                                                </section>
+                                            </a>
+                                            <section class="list-right">
+                                                <div class="rating-block row">
+                                                    <h4>@item.Rating <small>/ 5</small></h4>
+                                                    @for (int j = 1; j <= Math.Round(@item.Rating); j++)
+                                                    {
+                                                        <button type="button" class="btn btn-xs" style="color:#ff4c4c; background-color:#e3cf7a" aria-label="Left Align">
+                                                            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                        </button>
+                                                    }
+
+                                                    @for (int k = 1; k <= 5 - Math.Round(@item.Rating); k++)
+                                                    {
+                                                        <button type="button" class="btn btn-default btn-grey btn-xs" aria-label="Left Align">
+                                                            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                        </button>
+                                                    }
+                                                </div>
+                                                <p><i class="glyphicon glyphicon-earphone"></i><a href="tel:@item.OfficialContactNumber1">@item.OfficialContactNumber1</a></p>
+                                                <p><i class="glyphicon glyphicon-earphone"></i><a href="tel:@item.OfficialContactNumber2">@item.OfficialContactNumber2</a></p>
+                                                <p> <i class="glyphicon glyphicon-map-marker"></i><a href="#">@item.AddressTypeName</a>, <a href="#">@item.BuildingInformation.BuildingName</a></p>
+
+                                            </section>
+                                            <div class="clearfix"></div>
+                                        </li>
+
+                                    }
+                                }
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+
+
+
+    @{
+        <div class="clearfix"></div>
+        int i = 0;
+        foreach (var item in Model.DetailedCategories)
+        {
+
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                <div class="list-group list-group-alternate">
+                    <a href="/Ghaziabad/Crossings/@Model.CategoryName/@Model.SubCategoryName/@item.ID" class="list-group-item w3layouts-boder12"><span class="badge badge-primary">@Model.Businesses.Where(c => c.DetailedCategories.Where(k => k.ID == @item.ID).Count() > 0).Count()</span> <i class="ti ti-email"></i> @item.DetailedCategoryName in Crossings </a>
+                </div>
+            </div>
+
+        }
+    }
+    <div class="clearfix"></div>
+    <div class="form-group">
+        <div class="col-md-10">
+            @Html.ActionLink("Go Back To Search", "Index", null, new { @class = "btn btn-lg btn-block" })
+        </div>
+    </div>
+    <div class="clearfix"></div>
+
+</body>
+</html>

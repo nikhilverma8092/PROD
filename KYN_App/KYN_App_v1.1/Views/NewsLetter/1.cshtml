@@ -1,0 +1,274 @@
+﻿@model KYN_App_v1._1.Models.NewsLetterViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("SubmitComment", "NewsLetter", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+    <html lang="en">
+    <body>
+        <div class="container">
+            <div class="row">
+                <!-- Blog Post Content Column -->
+                <div class="col-lg-8">
+                    <!-- Blog Post -->
+                    <!-- Title -->
+                    <h1>@Model.BlogTitle</h1>
+                    <!-- Author -->
+                    @*<p class="lead">
+                            by <a href="#">Start Bootstrap</a>
+                        </p>*@
+                    <hr>
+                    <!-- Date/Time -->
+                    <p><span class="glyphicon glyphicon-time"></span>@Model.CreatedOn</p>
+                    <hr>
+
+
+                    <!-- Preview Image -->
+                    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                        <!-- Indicators -->
+                        <ol class="carousel-indicators">
+                            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                            @{
+                                for (int i = 1; i <= @Model.ImageSliders.Count; i++)
+                                {
+                                    <li data-target="#myCarousel" data-slide-to="@i"></li>
+                                }
+                            }
+                        </ol>
+                        <div class="carousel-inner" role="listbox">
+                            @{
+                                <div class="item active">
+                                    <img src=@Model.ImagePath alt="No Image">
+                                    @*<div class="carousel-caption">
+                                            <h3>Chania</h3>
+                                            <p>The atmosphere in Chania has a touch of Florence and Venice.</p>
+                                        </div>*@
+                                </div>
+
+                                foreach (var item in @Model.ImageSliders)
+                                {
+                                    <div class="item">
+                                        <img src=@item alt="Chania">
+                                        @*<div class="carousel-caption">
+                                                <h3>Chania</h3>
+                                                <p>The atmosphere in Chania has a touch of Florence and Venice.</p>
+                                            </div>*@
+                                    </div>
+                                }
+                            }
+                        </div>
+
+
+                        <!-- Left and right controls -->
+                        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+
+
+
+                    <hr>
+                    <!-- Post Content -->
+                    <p class="lead">Parents whose children study in Indirapuram Public Schools in Crossings Republik came together to demand immediate rollback of fee hiked by the school recently. They are also going to submitted a memorandum to the chief minister demanding a mechanism to check arbitrary hike in school fees.</p>
+                    <p class="lead" id="MainIssue">Main Issue</p>
+                    <p>Various parents’ groups had been protesting against fee hike by private schools in the district. Many parents had refused to pay the hiked fee and alleged that the hike was unjustified.</p>
+                    <p>In the wake of continued agitation by a group of parents against fee hike by schools, the city magistrate has issued a notice to all private schools in the district asking them to not take disciplinary action against students whose parents have not paid hiked fee.</p>
+                    <p>Parents from the Crossing Republik daily protesting in front of the school main gate but there is no response from the school management side.</p>
+                    <p>To create awareness in the Crossings Republik, 100s of families joined together to protest against School fee hike followed by Candle march in Crossings Republik along with the kids on a periodic basis.</p>
+                    <p>parents protest on dm office also for illogical fee hike by ips crossing republic gzb and cc send to hrd</p>
+                    <p class="lead" id="Current Situation">Meeting With DM and School Association</p>
+                    <p>Parents from the Crossings Repubik had a meeting with School association and DM. They discussed about the Annual Changes, NCERT books utilization and fee hike without parents approval.</p>
+                    <p>Outcome of the meeting was in favour with Parents. Administration forms a committee which will give report in 20 days and till that schools are not allowed to take annual charges and increased fee.</p>
+                    <p class="lead" id="CurrentStep">Current Step</p>
+                    <p>Many parents from the crossings Republik is going to Lucknow to meet CM Yogi Adityanath about fee hike and demanding a possibility of introducing a regulatory body for private schools.</p>
+                    <hr>
+                    <div>
+                        <iframe height="200" src="//www.youtube.com/embed/_OqUKD32SIc" frameborder="0" allowfullscreen></iframe>
+                        <iframe height="200" src="//www.youtube.com/embed/UEARa2-5Sf4" frameborder="0" allowfullscreen></iframe>
+                       
+                         <iframe height="200" src="//www.youtube.com/embed/HHAmYT7-ZfI" frameborder="0" allowfullscreen></iframe>
+                        <iframe height="200" src="//www.youtube.com/embed/EMPlW-R9K1M" frameborder="0" allowfullscreen></iframe>
+
+                        <iframe height="200" src="//www.youtube.com/embed/MaoV0qdxuiU" frameborder="0" allowfullscreen></iframe>
+                        <iframe height="200" src="//www.youtube.com/embed/fu4UtHcchCc" frameborder="0" allowfullscreen></iframe>
+
+                        <iframe height="200" src="//www.youtube.com/embed/rdct2VUlUqo" frameborder="0" allowfullscreen></iframe>
+                        <iframe height="200" src="//www.youtube.com/embed/VZPrejKquAE" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <hr>
+                    <div class="well">
+                        @*@Html.ValidationSummary("", new { @class = "text-danger" })
+                        <h4>Do you support Protest against Fee Hike</h4>
+                        @Html.TextBoxFor(m => m.InSupportName, new { @class = "form-control", type = "text", placeholder = "Your Name", maxlength = "100", tooltip = "Please Enter Your Name" })
+                        @Html.TextBoxFor(m => m.InSupportEmailID, new { @class = "form-control", type = "email", placeholder = "Email Address", maxlength = "100", tooltip = "Please Enter Your Email Address" })
+                        @@Html.TextBoxFor(m => m.InSupportMobileNumber, new { @class = "form-control", placeholder = "Mobile Number without leading Zero" })
+                        @Html.ValidationMessageFor(m => m.InSupportMobileNumber)*@
+
+                        <div>
+                            @Html.RadioButtonFor(x => x.InSupport, "true", new { @class = "col-md-2" }) Yes I support this activity
+                            <br />
+                            @Html.RadioButtonFor(x => x.InSupport, "false", new { @class = "col-md-2" }) No I don't support this activity
+                            <br />
+                            @Html.RadioButtonFor(x => x.InSupport, "null", new { @class = "col-md-2" }) May be Later
+                            <div class="form-group">
+                                <div class="col-md-10">
+                                    <input type="submit" class="btn btn-blog pull-right marginBottom10" value="Submit" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <!-- Blog Comments -->
+                    <!-- Comments Form -->
+                    <div class="well">
+                        <a href="#one"></a>
+                        <h4>Leave a Comment:</h4>
+                        <form role="form">
+                            <div class="form-group col-md-12 col-sm-12 col-lg-12 col-xs-12">
+                                @*<textarea class="form-control" rows="3"></textarea>*@
+                                @Html.TextAreaFor(model => model.NewComment, new { htmlAttributes = new { @class = "form-control col-md-12", @rows = "3" } })
+                            </div>
+                            @*<button type="submit" class="btn btn-primary">Submit</button>*@
+                            @Html.HiddenFor(c => c.PostedComments)
+                            @Html.HiddenFor(c => c.ID)
+                            <div class="form-group">
+                                <div class="col-md-10">
+                                    <input type="submit" class="btn btn-blog pull-right marginBottom10" value="Submit" />
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <br />
+                    <hr>
+                    @{
+                        foreach (var item in Model.PostedComments)
+                        {
+                            <div class="media">
+                                <a class="pull-left" href="#">
+                                    <img class="media-object" src="http://placehold.it/64x64" alt="">
+                                </a>
+                                <div class="media-body">
+                                    <h4 class="media-heading">
+                                        @item.Name
+                                        <small>@item.PostedOn</small>
+                                    </h4>
+                                    @item.Comment
+                                </div>
+                            </div>
+                        }
+                    }
+                    <!-- Posted Comments -->
+                    <!-- Comment -->
+                    <div class="media">
+                        @*<a class="pull-left" href="#">
+                                <img class="media-object" src="http://placehold.it/64x64" alt="">
+                            </a>
+                            <div class="media-body">
+                                <h4 class="media-heading">
+                                    Start Bootstrap
+                                    <small>August 25, 2014 at 9:30 PM</small>
+                                </h4>
+                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                            </div>*@
+                    </div>
+                    <!-- Comment -->
+
+                </div>
+                <!-- Blog Sidebar Widgets Column -->
+                <div class="col-md-4">
+                    <div class="well">
+                        <h4>Do you support Protest against Fee Hike</h4>
+                        <div>
+                            @Html.RadioButtonFor(x => x.InSupport, "true", new { @class = "col-md-2" }) Yes I support this activity
+                            <br />
+                            @Html.RadioButtonFor(x => x.InSupport, "false", new { @class = "col-md-2" }) No I don't support this activity
+                            <br />
+                            @Html.RadioButtonFor(x => x.InSupport, "null", new { @class = "col-md-2" }) May be Later
+                            <div class="form-group">
+                                <div class="col-md-10">
+                                    <input type="submit" class="btn btn-blog pull-right marginBottom10" value="Submit" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="well">
+                        <h4>Total Participation</h4>
+                        <div>
+                            <h5>Total Participation:@Model.PostedSupports.Count</h5>
+                            <h5>Total positive:@Model.PostedSupports.Where(c => c.InSupport == null ? false : c.InSupport.Value).Count().ToString()</h5>
+                        </div>
+                    </div>
+                    <!-- Blog Search Well -->
+                    <div class="well">
+                        <h4>Blog Search</h4>
+                        <div class="input-group">
+                            <input type="text" class="form-control">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                            </span>
+                        </div>
+                        <!-- /.input-group -->
+                    </div>
+                    <!-- Blog Categories Well -->
+                    <div class="well">
+                        <h4>Blog Categories</h4>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <ul class="list-unstyled">
+                                    <li>
+                                        <a href="#MainIssue">Main Issue</a>
+                                    </li>
+                                    <li>
+                                        <a href="#SchoolManagementMeeting">School Management Meeting</a>
+                                    </li>
+                                    <li>
+                                        <a href="#DMMeeting">DM Meeting</a>
+                                    </li>
+                                    <li>
+                                        <a href="#NoidaStadiumProtest">Noida Stadium Protest</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                    <!-- Side Widget Well -->
+                    @*<div class="well">
+                        <h4>Side Widget Well</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, perspiciatis adipisci accusamus laudantium odit aliquam repellat tempore quos aspernatur vero.</p>
+                    </div>*@
+                </div>
+            </div>
+            <hr>
+        </div>
+        <!-- /.container -->
+        <!-- jQuery -->
+        <script src="js/jquery.js"></script>
+        <!-- Bootstrap Core JavaScript -->
+        <script src="js/bootstrap.min.js"></script>
+    </body>
+
+
+
+
+
+
+
+</html>
+                        }
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

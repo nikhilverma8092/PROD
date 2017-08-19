@@ -1,0 +1,149 @@
+﻿
+@{
+    ViewBag.Title = "UploadFile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script src="@Url.Content("~/Scripts/scripts.js")"></script>
+
+
+<script>
+
+    $(document).ready(function () {
+        $(document).on('change', '.btn-file :file', function () {
+            var input = $(this),
+                label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+            input.trigger('fileselect', [label]);
+        });
+
+        $('.btn-file :file').on('fileselect', function (event, label) {
+
+            var input = $(this).parents('.input-group').find(':text'),
+		        log = label;
+
+            if (input.length) {
+                input.val(log);
+            } else {
+                if (log) alert(log);
+            }
+
+        });
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#img-upload').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#fileInput").change(function () {
+            readURL(this);
+        });
+    });
+
+
+    $(function () {
+
+        $("#go").click(function () {
+            var href = window.location.href;
+            var xhr = new XMLHttpRequest();
+            var fd = new FormData();
+            fd.append("file", document.getElementById('fileInput').files[0]);
+            fd.append("url", href);
+            xhr.open("POST", "/Upload/UploadFile/", true);
+            xhr.send(fd);
+            xhr.addEventListener("load", function (event) {
+                alert("Success");
+            }, false);
+        });
+
+    });
+</script>
+
+
+@using (Html.BeginForm("UploadFile", "Upload", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+    <div class="w3layouts-breadcrumbs text-center">
+        <div class="container">
+            <span class="agile-breadcrumbs"><a href="/Ghaziabad/Crossings"><i class="fa fa-home home_1"></i></a> / <span>Upload Primary Image</span></span>
+        </div>
+    </div>
+
+
+
+    <div class="container">
+        <h2 class="w3-head">Upload Primary Image</h2>
+    </div>
+
+
+    <div class="container">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Upload Image</label>
+                <div class="input-group">
+                    <span class="input-group-btn">
+                        <span class="btn btn-default btn-file">
+                            Browse… <input type="file" id="fileInput">
+                        </span>
+                    </span>
+                    <input type="text" class="form-control" readonly>
+                </div>
+                <img id='img-upload' />
+            </div>
+        </div>
+    </div>
+
+
+    <div>
+        @*@Html.TextBox("file", "", new { type = "file" }) <br />*@
+
+        @*<input type="submit" value="Upload" id="go" />*@
+        <input type='button' id='go' value="Upload Image" class="post-w3layouts-ad" />
+
+        @*<input type="file" id="fileInput" />
+        <input type='button' id='go' value="go" />
+
+
+        @ViewBag.Message*@
+
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-10">
+            @Html.ActionLink("Go Back", "Index", "Business", null, new { @class = "btn btn-lg btn-block" })
+        </div>
+    </div>
+
+}  
+
+<style>
+    .btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 50%;
+    min-height: 50%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
+#img-upload{
+    width: 50%;
+}
+</style>

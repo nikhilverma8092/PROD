@@ -1,0 +1,212 @@
+﻿@model KYN_App_v1._1.Models.UploadMultipleViewModel
+
+@{
+    ViewBag.Title = "UploadMultipleFiles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script src="@Url.Content("~/Scripts/scripts.js")"></script>
+
+
+<script>
+
+    $(document).ready(function () {
+        $(document).on('change', '.btn-file :file', function () {
+            var input = $(this),
+                label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+            input.trigger('fileselect', [label]);
+        });
+
+        $('.btn-file :file').on('fileselect', function (event, label) {
+
+            var input = $(this).parents('.input-group').find(':text'),
+		        log = label;
+
+            if (input.length) {
+                input.val(log);
+            } else {
+                if (log) alert(log);
+            }
+
+        });
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#img-upload').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#fileInput").change(function () {
+            readURL(this);
+        });
+    });
+
+
+    $(function () {
+
+        $("#go").click(function () {
+            var href = window.location.href;
+            var xhr = new XMLHttpRequest();
+            var fd = new FormData();
+            if (document.getElementById('fileInput').files.length > 0)
+                {
+                fd.append("file", document.getElementById('fileInput').files[0]);
+                }
+            fd.append("url", href);
+            xhr.open("POST", "/Upload/UploadSecondaryImages/", true);
+            xhr.send(fd);
+            xhr.addEventListener("load", function (event) {
+                alert("Successful");
+            }, false);
+            location.reload();
+        });
+
+    });
+</script>
+
+
+<div class="w3layouts-breadcrumbs text-center">
+    <div class="container">
+        <span class="agile-breadcrumbs"><a href="/Ghaziabad/Crossings"><i class="fa fa-home home_1"></i></a> / <span>Upload Multiple Images</span></span>
+    </div>
+</div>
+
+
+
+<div class="container">
+    <h2 class="w3-head">Upload Multiple Images</h2>
+</div>
+
+
+<div class="container">
+    <div class="col-md-9">
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-btn">
+                    <span class="btn btn-default btn-file">
+                        Browse… <input type="file" id="fileInput">
+                    </span>
+                </span>
+                <input type="text" class="form-control" readonly>
+            </div>
+            <img id='img-upload' />
+        </div>
+    </div>
+</div>
+<input type='button' id='go' value="Upload Selected Image" class="post-w3layouts-ad" />
+
+
+<div class="container">
+    <div id="main_area">
+        <!-- Slider -->
+        <div class="row">
+            <div class="col-sm-6" id="slider-thumbs">
+                <!-- Bottom switcher of slider -->
+                <ul class="hide-bullets">
+                    <li class="col-sm-3">
+                        <a class="thumbnail" id="carousel-selector-0">
+                            <img src="~/Images/Business_Images/@Model.BusinessID/Main.jpg">
+                            <header>Profile Image</header>
+                        </a>
+                    </li>
+                    @{
+                        int count = 0;
+                        foreach (var image in Model.ImageSliders)
+                        {
+                            count += 1;
+                            <li class="col-sm-3 w3layouts-boder12" style="margin:5px" id="carousel-selector-@count">
+                                <a class="thumbnail" id="carousel-selector-1"><img src="@image" class="focus-image img-responsive" style="min-height:75px;max-height:75px">
+                                @Html.ActionLink("Delete", "DeleteFile", "Upload", new { ID = @Model.BusinessID, imageID = @image }, null)
+                                </a>
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
+            <div class="col-sm-6">
+                <div class="col-xs-12" id="slider">
+                    <!-- Top part of the slider -->
+                    <div class="row">
+                        <div class="col-sm-12" id="carousel-bounding-box">
+                            <div class="carousel slide" id="myCarousel">
+                                <!-- Carousel items -->
+                                <div class="carousel-inner">
+                                    <div class="active item" data-slide-number="0">
+                                        <img src="~/Images/Business_Images/@Model.BusinessID/Main.jpg" class="focus-image business-Detail-Image-carousel">
+                                    </div>
+                                    @{
+                                        int count1 = 0;
+                                        foreach (var image in Model.ImageSliders)
+                                        {
+                                            <div class="item" data-slide-number="@count1">
+                                                <img src="@image" class="focus-image business-Detail-Image-carousel">
+                                            </div>
+                                            count1 += 1;
+                                        }
+                                    }
+
+                                </div>
+                                <!-- Carousel nav -->
+                                <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                                    <span class="glyphicon glyphicon-chevron-left"></span>
+                                </a>
+                                <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                                    <span class="glyphicon glyphicon-chevron-right"></span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/Slider-->
+        </div>
+    </div>
+</div>
+
+<style>
+    .hide-bullets {
+        list-style: none;
+        margin-left: -40px;
+        margin-top: 20px;
+    }
+
+    .thumbnail {
+        padding: 0;
+    }
+
+    .carousel-inner > .item > img, .carousel-inner > .item > a > img {
+        width: 100%;
+    }
+
+    .btn-file {
+        position: relative;
+        overflow: hidden;
+    }
+
+        .btn-file input[type=file] {
+            position: absolute;
+            top: 0;
+            right: 0;
+            min-width: 50%;
+            min-height: 50%;
+            font-size: 100px;
+            text-align: right;
+            filter: alpha(opacity=0);
+            opacity: 0;
+            outline: none;
+            background: white;
+            cursor: inherit;
+            display: block;
+        }
+
+    #img-upload {
+        width: 50%;
+    }
+</style>

@@ -1,0 +1,143 @@
+﻿@model KYN_App_v1._1.Models.ResponseBusinessPrimaryDetailViewModel
+
+@{
+    ViewBag.Title = "BusinessDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div>
+    @*<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 visible-md visible-lg">
+        <img src=@Model.ImagePath class="img-rounded img-responsive" style="max-height:500px" />
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 visible-sm visible-xs">
+        <img src=@Model.ImagePath class="img-rounded img-responsive" />
+    </div>*@
+
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            @{
+                for (int i = 1; i <= @Model.ImageSliders.Count; i++)
+                {
+                    <li data-target="#myCarousel" data-slide-to="@i"></li>
+                }
+            }
+        </ol>
+        <div class="carousel-inner" role="listbox">
+            @{
+                <div class="item active">
+                    <img src=@Model.ImagePath alt="No Image" class="focus-image business-Detail-Image-carousel">
+                    @*<div class="carousel-caption">
+                            <h3>Chania</h3>
+                            <p>The atmosphere in Chania has a touch of Florence and Venice.</p>
+                        </div>*@
+                </div>
+
+                foreach (var item in @Model.ImageSliders)
+                {
+                    <div class="item">
+                        <img src=@item alt="No Image" class="focus-image business-Detail-Image-carousel">
+                        @*<div class="carousel-caption">
+                                <h3>Chania</h3>
+                                <p>The atmosphere in Chania has a touch of Florence and Venice.</p>
+                            </div>*@
+                    </div>
+                }
+            }
+        </div>
+
+
+        <!-- Left and right controls -->
+        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+
+    </div>
+    <div style="margin-bottom:10px">
+        <div class="w3layouts-breadcrumbs text-center col-md-9">
+            <div class="container">
+                <span class="agile-breadcrumbs">
+                    <a href="/Ghaziabad/Crossings"><i class="fa fa-home home_1"></i></a> /
+                    <a href="/Ghaziabad/Crossings">Categories</a> /
+                    <a href="/Ghaziabad/Crossings/@Model.Category.CategoryName">@Model.Category.CategoryName</a> /
+                    <a href="/Ghaziabad/Crossings/@Model.Category.CategoryName/@Model.SubCategory.SubCategoryName">@Model.SubCategory.SubCategoryName</a> /
+                    @foreach (var item in Model.DetailedCategories)
+                    {
+                        <a href="/Ghaziabad/Crossings/@Model.Category.CategoryName/@Model.SubCategory.SubCategoryName/@item.ID">@item.DetailedCategoryName</a> <span>-</span>
+                    }
+                </span>
+            </div>
+        </div>
+
+        <a 
+           href="/Ghaziabad/Crossings/@Model.Category.CategoryName/@Model.SubCategory.SubCategoryName/@Model.Name/@Model.ID/Gallery" 
+           class="col-md-3 col-sm-12 col-xs-12" 
+           style="background-color:#ff4c4c; color:#fff; text-align:center;height:100%; padding:11px" target="_blank">View All Images</a>
+    </div>
+
+    <br />
+    <div class="well col-md-12" style="margin-top:10px">
+        <h1><em>@Model.Name</em></h1>
+        
+    </div>
+    @*<div class="row">
+        <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12 h5 badge" style="margin-bottom:25px">@Model.BusinessType.BusinessTypeName</div>
+        @Html.ActionLink(Model.Category.CategoryName, "GetMoreSubCategories", "Search", new { categoryID = Model.Category.ID }, new { @class = "col-lg-2 col-md-3 col-sm-12 col-xs-12 h5 badge", @style = "margin-bottom:25px" })
+        @Html.ActionLink(@Model.SubCategory.SubCategoryName, "SearchBusinessDetailBySubCategory", "Search", new { subCategoryID = @Model.SubCategory.ID }, new { @class = "col-lg-2 col-md-3 col-sm-12 col-xs-12 h5 badge", @style = "margin-bottom:25px" })
+        @{
+            foreach (var item in Model.DetailedCategories)
+            {
+                @Html.ActionLink(@item.DetailedCategoryName, "GetSearchBusinessInformationByDetailCategoryID", "Search", new { detailCategoryID = @item.ID }, new { @class = "col-lg-2 col-md-3 col-sm-12 col-xs-12 h5 badge", @style = "margin-bottom:25px" })
+            }
+        }
+    </div>*@
+    @*<div>
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 h5" style="margin-bottom:25px"><p>@Model.Description</p></div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 h5" style="margin-bottom:25px">@Model.AnyOtherDetail</div>
+    </div>*@
+
+    <div class="product-view">
+        <p> <i class="glyphicon glyphicon-map-marker"></i><a href="#">@Model.AddressTypeInfo.AddressTypeName</a>, <a href="#">@Model.BuildingInformation.BuildingName</a></p>
+    </div>
+
+    <div class="product-details col-md-6">
+        <h4><span class="w3layouts-agileinfo">Summary</span> :<p>@Model.Description</p><p>@Model.AnyOtherDetail</p><div class="clearfix"></div></h4>
+        <p><i class="glyphicon glyphicon-earphone"></i><a href="tel:@Model.OfficialContactNumber1">@Model.OfficialContactNumber1</a></p>
+        @if (!string.IsNullOrEmpty(@Model.OfficialContactNumber2))
+        {
+            <p><i class="glyphicon glyphicon-earphone"></i><a href="tel:@Model.OfficialContactNumber1">@Model.OfficialContactNumber2</a></p>
+        }
+        <p><i class="glyphicon glyphicon-envelope"></i><a href="tel:@Model.OfficialContactNumber1">@Model.BusinessEmail</a></p>
+    </div>
+  
+        @*<div class="row">
+
+            <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 h4" style="margin-bottom:25px"><i class="material-icons">contact_phone</i></div>
+            <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12 h5" style="margin-bottom:25px"><a href="tel:@Model.OfficialContactNumber1">@Model.OfficialContactNumber1</a></div>
+            <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12 h5" style="margin-bottom:25px"><a href="tel:@Model.OfficialContactNumber2">@Model.OfficialContactNumber2</a></div>
+            <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12 h4" style="margin-bottom:25px"><i class="material-icons">email</i></div>
+            <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12 h5" style="margin-bottom:25px"><a href="mailto:@Model.BusinessEmail">@Model.BusinessEmail</a></div>
+        </div>
+        <div class="row">
+            <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12 h4" style="margin-bottom:25px"><i class="material-icons">room</i></div>
+            <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12 h5" style="margin-bottom:25px">@Model.AddressTypeInfo.AddressTypeName</div>
+            <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12 h5" style="margin-bottom:25px">@Model.BuildingInformation.BuildingName</div>
+        </div>*@
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-10">
+            @Html.ActionLink("Go Back To Search", "SearchBusinessDetailBySubCategory", "Search", new { subCategoryID = Model.SubCategory.ID }, new { @class = "btn btn-lg btn-block" })
+        </div>
+    </div>
+
+<div class="clearfix"></div>
+

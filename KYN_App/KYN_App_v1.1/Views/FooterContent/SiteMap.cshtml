@@ -1,0 +1,49 @@
+﻿@model KYN_App_v1._1.Models.SearchViewModel
+@{
+    ViewBag.Title = "SiteMap";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<body>
+    <div class="w3layouts-breadcrumbs text-center">
+        <div class="container">
+            <span class="agile-breadcrumbs"><a href="/Ghaziabad/Crossings"><i class="fa fa-home home_1"></i></a> / <span>Sitemap</span></span>
+        </div>
+    </div>
+    <!-- //breadcrumbs -->
+    <!-- Regions -->
+    <div class="container">
+        <h2 class="w3-head">Sitemap</h2>
+    </div>
+    <div class="sitemap-regions">
+        <div class="container">
+            <div class="sitemap-region-grid">
+                @{
+                    int count = 0;
+                    foreach (var item in Model.Categories)
+                    {
+                        <div class="sitemap-region-grid">
+                            <div class="sitemap-region">
+                                <h4><a href="/Ghaziabad/Crossings/@item.BusinessCategory.CategoryName" style="color:#ff4c4c">@item.BusinessCategory.CategoryName</a></h4>
+                                <ul>
+                                    @foreach (var subCategory in @item.SubCategories)
+                                    {
+                                        <li><a href="/Ghaziabad/Crossings/@item.BusinessCategory.CategoryName/@subCategory.SubCategoryName">@subCategory.SubCategoryName</a></li>
+                                        count++;
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+
+
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</body>
+
+</html>
